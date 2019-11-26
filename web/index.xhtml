@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+   <meta name="viewport" content="width=device-width,initial-scale=1"/>
+   <title>lab3</title>
+   <h:outputStylesheet library="default" name="/styles/index.css"/>
+</h:head>
+
+<h:body>
+
+
+   <div class="header_wr header">
+      <h1 class="logo l1">Добро пожаловать!</h1>
+   </div>
+   <br/><br/><br/><br/><br/>
+   <table width="90%" >
+      <tr>
+         <th align="left" >
+    <p class="logo l2">Воронкова Инна Олеговна</p>
+   <p class="logo l2">Группа: P3201</p>
+   <p>Вариант: 201073</p>
+   <p class="logo 1"><strong>Дата</strong>: <span id="data" /></p>
+   <p class="logo l4"><strong>Текущее время</strong>: <span id="time" /></p>
+   </th>
+
+   <th>
+   <div class="c" id="myCanvas">
+   </div>
+   </th>
+   </tr>
+   </table>
+   <h:link value="Вперед!" outcome="main">
+
+   </h:link>
+
+   <h:outputScript library="default"  name="js/time.js"/>
+
+</h:body>
+
+</html>
+
+

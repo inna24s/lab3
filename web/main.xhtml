@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+
+    <h:head>
+        <title>Web3</title>
+        <meta  name="viewport" content="width=device-width,initial-scale=1"/>
+
+        <h:outputStylesheet library="default" name="/styles/check.css"/>
+    </h:head>
+
+    <h:body >
+
+        <div  class="header1">
+            <h1>Попадание точки в заданную область</h1>
+        </div>
+        <div id="errors"><h:outputText id="errors-text" value="#{mainBean.errorMessage}"/></div>
+
+        <table width="100%" >
+            <tr>
+                <th align="left" width="40%">
+                    <div class="y">
+                        <h:form name="myForms" method="post" id="form" onsubmit="return check(checkR(), checkY(), checkX())">
+                            <h2>1.Выберите <i>X</i> координату:</h2>
+                            <p:spinner id="x" value="#{mainBean.x}" stepFactor="0.5" maxlength="5" >
+                                <f:validateDoubleRange minimum="-3.99999" maximum="3.99999"/>
+                            </p:spinner>
+                            <h:inputHidden id="inpX"  />
+                            <br/>
+
+                            <h2>2.Введите <i>Y</i> координату:</h2>
+                            <p><p:inputText id="y" required="true" value="#{mainBean.y}"
+                                            autocomplete="off" placeholder="(-5; 5)" maxlength="5">
+                                <f:validateDoubleRange minimum="-4.99999" maximum="4.9999999"/>
+                            </p:inputText><br/></p>
+
+
+                            <h2>3.Кликните по <i>R</i>:</h2>
+                            <p id="radius" >
+                                <h:commandButton value="1" name = "r" onclick="setR(1); return false;"/>
+                                <h:commandButton value="2" name = "r" onclick="setR(2); return false;"/>
+                                <h:commandButton value="3" name = "r" onclick="setR(3); return false;"/>
+                                <h:commandButton value="4" name="r" onclick="setR(4); return false;"/>
+                                <h:commandButton value="5" name = "r" onclick="setR(5); return false;"/>
+                                <br/>
+                                <h:inputText id="rt" value="#{mainBean.r}" readonly="true"/>
+                            </p>
+
+                            <p><h:commandButton name="sub" id="sub" type="submit"  update="dataTable form"  value="Отправить" action="#{points.addResult}" onclick="#{mainBean.validateR()}">
+
+                            </h:commandButton></p>
+                        </h:form>
+                        <div class="panel err_msg" id="err_msg"></div>
+                    </div>
+                </th>
+
+                <td align="center" width="35%">
+                    <div class="c" id="myCanvas">
+                        <h:outputScript library="default"  name="js/canvas.js"/>
+                    </div>
+                    <textarea id="log" cols="20" rows="4" readonly="readonly">События будут показываться здесь!</textarea>
+                </td>
+                <td align="right" width="30%">
+                    <div class="panel com" id="comment"></div>
+                    <div id="star"></div>
+                    <div id="reaction"></div>
+                    <div id="sound"></div>
+
+                </td>
+            </tr>
+        </table>
+
+
+        <h:outputScript library="default"  name="js/ch.js"/>
+
+        <br/>
+        <h2>История запросов</h2>
+        <br/>
+        <h:dataTable styleClass="block" id = "responsesTable" style="width: 60%;" border="1"
+                      var="point" value="#{points.allResults}" >
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{point.x}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{point.y}
+            </h:column>
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{point.r}
+            </h:column>
+            <h:column>
+                <f:facet name="header">hit</f:facet>
+                #{point.hit}
+            </h:column>
+        </h:dataTable>
+        <h:inputHidden id="hitCh" value="#{point.hit}"/>
+        <h:link value="Стартовая страница" id="link" outcome="index" />
+
+
+
+    </h:body>
+
+</f:view>
+
+</html>

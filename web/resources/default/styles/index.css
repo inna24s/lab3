@@ -1,0 +1,14 @@
+body{
+    background-image:url('#{request.contextPath}/resources/default/im/black.jpg');
+    font-family: "Andale Mono", monospace;
+    font-size: 24px;
+    color: mediumorchid;
+    margin: 2%;
+}
+
+header{
+    color: Purple;
+}
+#time {
+    text-align: right;
+}
